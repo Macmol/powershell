@@ -51,11 +51,11 @@ foreach ($key in $filetypes.keys) {
                 $file = $file.basename + "_" + $timestamp + $file.Extension
             }
                 
-            
+            Move-Item $downdir\$file $destdir #-WhatIf
+            write-host "Archiviere: "  $file
 
         }
-        Move-Item $downdir\$file $destdir #-WhatIf
-        write-host "Archiviere: "  $file
+        
 
     }
       
