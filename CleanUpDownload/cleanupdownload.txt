@@ -1,0 +1,2 @@
+Ziel: C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -command .\cleanupdownload.ps1
+Ausführen: "c:\Users\00008062\OneDrive - Deutscher Sparkassen Verlag GmbH\Coding"
