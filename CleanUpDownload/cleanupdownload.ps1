@@ -1,6 +1,7 @@
 # Download Cleanup
 # Marc Lange 14.03.2023
 # Modified 26.07.2023
+# 21.11.2023 zusätzliche Extensions
 
 
 
@@ -22,6 +23,9 @@ $filetypes.add( "jpeg", "\Archiv\Media" )
 $filetypes.add( "mp4", "\Archiv\Media" )
 $filetypes.add( "exe", "\Archiv\Sonstiges" )
 $filetypes.add( "csv", "\Archiv\Sonstiges" )
+$filetypes.add( "html", "\Archiv\Sonstiges" )
+$filetypes.add( "htm", "\Archiv\Sonstiges" )
+$filetypes.add( "eml", "\Archiv\EMail" )
 
 
 
