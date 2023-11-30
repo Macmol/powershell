@@ -26,6 +26,7 @@ $filetypes.add( "csv", "\Archiv\Sonstiges" )
 $filetypes.add( "html", "\Archiv\Sonstiges" )
 $filetypes.add( "htm", "\Archiv\Sonstiges" )
 $filetypes.add( "eml", "\Archiv\EMail" )
+$filetypes.add( "msg", "\Archiv\EMail" )
 
 
 
@@ -38,7 +39,7 @@ foreach ($key in $filetypes.keys) {
 
         $lastWrite = (get-item $downdir\$file).LastWriteTime
         $timespan = new-timespan -days 30
-         
+        
         if (((get-date) - $lastWrite) -gt $timespan) {
                         
             $destdir = $downdir + $filetypes[$key]
