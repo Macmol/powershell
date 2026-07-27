@@ -1,4 +1,4 @@
-# Download Cleanup
+﻿# Download Cleanup
 # Marc Lange 14.03.2023
 # Modified 26.07.2023
 # 21.11.2023 zusätzliche Extensions
@@ -17,10 +17,10 @@ $filetypes.add( "doc", "\Archiv\Office\Word" )
 $filetypes.add( "xlsx", "\Archiv\Office\Excel" )
 $filetypes.add( "xls", "\Archiv\Office\Excel" )
 $filetypes.add( "zip", "\Archiv\ZIP" )
-$filetypes.add( "7z", "\Archiv\ZIP" )
 $filetypes.add( "png", "\Archiv\Media" )
 $filetypes.add( "jpg", "\Archiv\Media" )
 $filetypes.add( "jpeg", "\Archiv\Media" )
+$filetypes.add( "webp", "\Archiv\Media" )
 $filetypes.add( "jfif", "\Archiv\Media" )
 $filetypes.add( "mp4", "\Archiv\Media" )
 $filetypes.add( "exe", "\Archiv\Sonstiges" )
@@ -29,8 +29,11 @@ $filetypes.add( "html", "\Archiv\Sonstiges" )
 $filetypes.add( "htm", "\Archiv\Sonstiges" )
 $filetypes.add( "eml", "\Archiv\EMail" )
 $filetypes.add( "msg", "\Archiv\EMail" )
+$filetypes.add( "stl", "\Archiv\3Dprint" )
+$filetypes.add( "7z", "\Archiv\ZIP" )
 
 
+$myerror = $false
 
 foreach ($key in $filetypes.keys) {
     
@@ -41,8 +44,19 @@ foreach ($key in $filetypes.keys) {
 
         $lastWrite = (get-item $downdir\$file).LastWriteTime
         $timespan = new-timespan -days 30
+
+        try {
+            $doit = ((get-date) - $lastWrite) -gt $timespan     
+        }
+        catch {
+            $doit = $false
+            $myerror = $true
+            write-host $file -ForegroundColor red
+        }
+
+
         
-        if (((get-date) - $lastWrite) -gt $timespan) {
+        if ($doit) {
                         
             $destdir = $downdir + $filetypes[$key]
             if (!(Test-Path -PathType Container $destdir)) {
@@ -71,6 +85,10 @@ foreach ($key in $filetypes.keys) {
 }
 
 
-
+if ($myerror) {
+    [console]::beep(500,200)
+    [console]::beep(400,200)
+    Read-Host "Fehler beim Verschieben. Bitte Enter drücken"
+}
 
 
